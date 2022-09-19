@@ -1,34 +1,60 @@
 import { useContext, useState } from "react";
 import { NumberContext } from "../route/routing";
+import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const InvestNow = () => {
+    const navigate = useNavigate();
     const { cart } = useContext(NumberContext);
-    console.log(cart);
-    // const [isTouched, setTouched] = useState(false)
-    // const [inputValue, setInputValue] = useState("");
-    // const [isValid, setValid] = useState(true)
 
-    // const handleInput = e => {
-    //     setInputValue(e.target.value)
-    //     // validate(e.target.value)
-    //     console.log(e.target.value)
-    // }
+    React.useEffect(() => {
+        window.onbeforeunload = function () {
+            if (cart.length === 0) { navigate("/"); }
 
-    // // const validate = val => {
-    // //     if (e.target.name) {
+            return true;
+        };
+        return () => {
+            window.onbeforeunload = null;
+            // console.log(cart, "useEffect")
+            if (cart.length === 0) {
+                navigate("/");
+                window.location.reload(false);
+            }
+        };
+    });
 
-    // //     }
-    // // }
+    const minimum = cart.map((k) => (k.minimumPurchaseAmount));
+    const maximum = cart.map((k) => (k.maximumPurchaseAmount));
 
-    const min = 500;
-    const max = 1000000;
+    const mini = minimum.map(str => {
+        return Number(str);
+    });
+    const maxi = maximum.map(str => {
+        return Number(str);
+    });
+
+    const min = mini[0]
+    const max = maxi[0]
 
     const [value, setValue] = useState('');
+    const [validate, SetValidation] = useState('')
 
     const handleChange = event => {
-        const value = Math.max(min, Math.min(max, Number(event.target.value)));
-        setValue(value);
+        setValue(event.target.value);
+        validationStatus(event.target.value)
+        console.log(event.target.value)
     };
+    const validationStatus = (value) => {
+        if (value < min) {
+            SetValidation('amount min')
+        } else if (value > max) {
+            SetValidation('amount max')
+        } else {
+            SetValidation('')
+        }
+    }
+
+    console.log()
 
     return (
         <>
@@ -48,20 +74,20 @@ const InvestNow = () => {
                                     <span className="dot"></span>
                                     <small>{list.riskmeter}</small>
                                 </div>
-
                                 <div className="mt-3">Amount</div>
                                 <div>
                                     <form>
                                         <input
-                                            type="text"
-                                            placeholder="Your fav number"
-                                            value={value}
+                                            type="number"
+                                            placeholder="Enter Your Amount"
+                                            // value={value}
                                             onChange={handleChange}
                                         />
                                     </form>
                                 </div>
-                                <div className="mt-2">
-                                    Min. Amount: {list.minimumPurchaseAmount}
+                                <div className="mt-2 text-danger">
+                                    {validate === "amount min" ? `Min. Amount:${list.minimumPurchaseAmount}` :
+                                        validate === "amount max" ? `Max. Amount:${list.maximumPurchaseAmount}` : ""}
                                 </div>
                             </div>
                         </div>
