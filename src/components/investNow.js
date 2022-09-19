@@ -9,8 +9,9 @@ const InvestNow = () => {
 
     React.useEffect(() => {
         window.onbeforeunload = function () {
-            if (cart.length === 0) { navigate("/"); }
-
+            if (cart.length === 0) {
+                navigate("/");
+            }
             return true;
         };
         return () => {
@@ -54,7 +55,7 @@ const InvestNow = () => {
         }
     }
 
-    console.log()
+    console.log(value)
 
     return (
         <>

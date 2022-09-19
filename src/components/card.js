@@ -7,11 +7,11 @@ const Card = (props) => {
     const navigate = useNavigate();
     const cardData = props.data;
 
-    
+
     const test = (value = "") => {
         let temp = [...cart];
         if (cart.length > 0) {
-            let tem = temp.filter(item => item.id == value.id);
+            let tem = temp.filter(item => item.id === value.id);
             if (tem.length > 0) {
             } else {
                 temp.push(value);
@@ -20,7 +20,7 @@ const Card = (props) => {
             temp.push(value);
         }
         setCart(temp);
-      if(value !== "") { navigate("/invest");}
+        if (value !== "") { navigate("/invest"); }
     }
     return (
         <>
