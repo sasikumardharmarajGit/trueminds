@@ -1,6 +1,5 @@
 import { Suspense, lazy, createContext, useState } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
-import Dummy from "../data/dummy";
 const Home = lazy(() => import("../pages/home"));
 const Invest = lazy(() => import("../pages/invest"));
 const LoadingMessage = () => ("Loading...");
@@ -15,7 +14,7 @@ const Routing = () => {
         <HashRouter>
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route path="/invest" element={<Invest/>} />
+            <Route path="/invest" element={<Invest />} />
           </Routes>
         </HashRouter>
       </Suspense>
