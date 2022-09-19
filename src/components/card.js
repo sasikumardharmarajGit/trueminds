@@ -25,18 +25,16 @@ const Card = (props) => {
     return (
         <>
             {cardData.map((i, id) => (
-                <div className="card mb-3 shadow-sm rounded" key={id} onClick={() => {
-                    test(i)
-                }}>
+                <div className="card mb-3 shadow-sm rounded border-0" key={id} onClick={() => { test(i) }}>
                     <div className="card-body d-flex justify-content-between align-items-center">
-                        <div className="">
-                            {i.name}
+                        <div>
+                            <div className="heading_text">{i.name}</div>
                             <div>
-                                <small>{i.classification}</small>
+                                <span className='smaller_text'>{i.classification}</span>
                                 <span className="dot"></span>
-                                <small>{i.category}</small>
+                                <span className='smaller_text'>{i.category}</span>
                                 <span className="dot"></span>
-                                <small>{i.riskmeter}</small>
+                                <span className='smaller_text'>{i.riskmeter}</span>
                             </div>
                         </div>
                         <div>

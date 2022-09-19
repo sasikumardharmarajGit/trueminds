@@ -6,7 +6,7 @@ import Routing from './route/routing';
 function App() {
 
   return (
-    <div className='container'>
+    <div className='container py-5'>
       <Routing />
     </div>
   );

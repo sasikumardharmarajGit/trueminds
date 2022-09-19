@@ -16,7 +16,7 @@ const InvestNow = () => {
         };
         return () => {
             window.onbeforeunload = null;
-            // console.log(cart, "useEffect")
+            console.log(cart, "useEffect")
             if (cart.length === 0) {
                 navigate("/");
                 window.location.reload(false);
@@ -43,7 +43,6 @@ const InvestNow = () => {
     const handleChange = event => {
         setValue(event.target.value);
         validationStatus(event.target.value)
-        console.log(event.target.value)
     };
     const validationStatus = (value) => {
         if (value < min) {
@@ -65,38 +64,36 @@ const InvestNow = () => {
                         <div key={index} className="card mb-3 shadow-sm rounded">
                             <div className="card-body">
                                 <div className="d-flex justify-content-between">
-                                    <h3>{list.name}</h3>
-                                    <span>Min.Amount: {list.minimumPurchaseAmount}</span>
+                                    <div className="heading_text left_margin">{list.name}</div>
+                                    <span className="bolder_text">Min.Amount: ₹ {list.minimumPurchaseAmount}</span>
                                 </div>
-                                <div>
-                                    <small>{list.classification}</small>
+                                <div className="left_margin">
+                                    <small className='smaller_text'>{list.classification}</small>
                                     <span className="dot"></span>
-                                    <small>{list.category}</small>
-                                    <span className="dot"></span>
-                                    <small>{list.riskmeter}</small>
+                                    <small className='smaller_text'>{list.category}</small>
                                 </div>
-                                <div className="mt-3">Amount</div>
+                                <div className="mt-3 text">Amount</div>
                                 <div>
                                     <form>
                                         <input
                                             type="number"
-                                            placeholder="Enter Your Amount"
-                                            // value={value}
+                                            placeholder="0"
                                             onChange={handleChange}
+                                            className="form-control mt-2"
                                         />
                                     </form>
                                 </div>
-                                <div className="mt-2 text-danger">
-                                    {validate === "amount min" ? `Min. Amount:${list.minimumPurchaseAmount}` :
-                                        validate === "amount max" ? `Max. Amount:${list.maximumPurchaseAmount}` : ""}
+                                <div className="mt-2 fw-bold text-danger">
+                                    {validate === "amount min" ? `Min. Amount: ₹ ${list.minimumPurchaseAmount}` :
+                                        validate === "amount max" ? `Max. Amount: ₹ ${list.maximumPurchaseAmount}` : ""}
                                 </div>
                             </div>
                         </div>
                     )
                 })
             }
-            <div class="d-grid gap-2">
-                <button class="btn btn-primary" type="button">Invest Now</button>
+            <div className="d-grid gap-2">
+                <button className="btn btn-primary investbtn" type="button">Invest Now</button>
             </div>
         </>
     )

@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  min-height: 100vh;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -18,9 +22,44 @@ code {
   background-color: #423d3d;
   border-radius: 50%;
   display: inline-block;
-  margin: 2px 5px;
+  margin: 2px 10px;
 }
 
-.btn {
-  color: black !important;
+.investbtn {
+  color: whitesmoke !important;
+  background-color: royalblue !important;
+  font-size: 20px !important;
+  font-weight: 600;
+}
+
+.heading_text {
+  font-size: 21px;
+  font-weight: 700;
+  color: #535866;
+}
+
+.smaller_text {
+  font-size: 12px;
+  color: #00000073;
+  font-weight: 600;
+}
+
+.bolder_text {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.text {
+  font-size: medium;
+  color: black;
+  font-weight: 500;
+}
+
+.form-control:focus {
+  outline: none !important;
+  border-color: none !important;
+}
+
+.left_margin {
+  margin-left: 15px;
 }
