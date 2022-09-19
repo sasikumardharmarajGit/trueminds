@@ -24,6 +24,7 @@ const Card = (props) => {
     }
     return (
         <>
+            <h2 className="mb-3">Trueminds Schemes</h2>
             {cardData.map((i, id) => (
                 <div className="card mb-3 shadow-sm rounded border-0" key={id} onClick={() => { test(i) }}>
                     <div className="card-body d-flex justify-content-between align-items-center">
