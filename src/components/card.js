@@ -20,7 +20,7 @@ const Card = (props) => {
             temp.push(value);
         }
         setCart(temp);
-        if (value !== "") { navigate("/invest"); }
+        if (value !== "") { navigate("/invest", { state: temp }); }
     }
     return (
         <>

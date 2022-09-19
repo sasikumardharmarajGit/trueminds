@@ -1,9 +1,9 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useLayoutEffect } from "react";
 import { NumberContext } from "../route/routing";
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const InvestNow = () => {
+const InvestNow = (props) => {
     const navigate = useNavigate();
     const { cart } = useContext(NumberContext);
 
@@ -24,25 +24,38 @@ const InvestNow = () => {
     });
 
 
+
     const [value, setValue] = useState('');
-    const [validate, SetValidation] = useState('')
+    const [validate, SetValidation] = useState([{ id: '', valid: '' }]);
 
-    const handleChange = (event, value) => {
-        console.log(value);
+    useEffect(() => {
+        let temp = [...validate];
+        cart.map((item, index) => {
+            if (index == 0) {
+                temp[index].id = item.id;
+                temp[index].valid = '';
+            } else {
+                temp.push({ id: item.id, valid: '' });
+            }
+        });
+        SetValidation(temp);
+    }, [cart.length]);
+    const handleChange = (event, value, index) => {
         setValue(event.target.value);
-        validationStatus(event.target.value, value)
+        validationStatus(event.target.value, value, index)
     };
-    const validationStatus = (value, values) => {
+    const validationStatus = (value, values, index) => {
+        let temp = [...validate]
         if (value < parseInt(values.minimumPurchaseAmount)) {
-            SetValidation('amount min')
+            temp[index].valid = 'amount min';
         } else if (value > parseInt(values.maximumPurchaseAmount)) {
-            SetValidation('amount max')
+            temp[index].valid = ('amount max')
         } else {
-            SetValidation('')
+            temp[index].valid = ''
         }
+        SetValidation(temp);
     }
-
-    const [indexValue, setIndexValue] = useState(false)
+    const [indexValue, setIndexValue] = useState([])
 
     useEffect(() => {
         if (cart[0].id) {
@@ -73,14 +86,14 @@ const InvestNow = () => {
                                         <input
                                             type="number"
                                             placeholder="0"
-                                            onChange={(e) => handleChange(e, list)}
+                                            onChange={(e) => handleChange(e, list, index)}
                                             className="form-control mt-2"
                                         />
                                     </form>
                                 </div>
                                 <div className="mt-2 fw-bold text-danger">
-                                    {validate === "amount min" ? `Min.Amount: ₹ ${parseInt(list.minimumPurchaseAmount)}` :
-                                        validate === "amount max" ? `Max.Amount: ₹ ${parseInt(list.maximumPurchaseAmount)}` : ""}
+                                    {validate[index]?.valid === "amount min" ? `Min.Amount: ₹ ${parseInt(list.minimumPurchaseAmount)}` :
+                                        validate[index]?.valid === "amount max" ? `Max.Amount: ₹ ${parseInt(list.maximumPurchaseAmount)}` : ""}
                                 </div>
 
                             </div>
