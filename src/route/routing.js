@@ -1,8 +1,10 @@
 import { Suspense, lazy, createContext, useState } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
+
 const Home = lazy(() => import("../pages/home"));
 const Invest = lazy(() => import("../pages/invest"));
 const LoadingMessage = () => ("Loading...");
+
 export const NumberContext = createContext();
 
 

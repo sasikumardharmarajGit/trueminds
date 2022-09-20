@@ -67,3 +67,7 @@ code {
 h2 {
   color: #000000bd;
 }
+
+.container {
+  max-width: 960px !important;
+}
